@@ -1,0 +1,81 @@
+.task-form {
+  * {
+    font-size: 1.5rem;
+  }
+
+  .task-fields {
+    display: flex;
+    flex-direction: column;
+
+    .input-block {
+      display: flex;
+      align-items: center;
+
+      input {
+
+      }
+
+      textarea {
+        text-align: left;
+      }
+
+      label {
+        min-width: 150px;
+      }
+
+      input, textarea {
+        padding: 5px;
+        border-radius: 5px;
+      }
+
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.tasks {
+  h1 {
+    display: flex;
+  }
+
+  .tasks-list {
+    .tasks-list-item {
+      display: flex;
+
+
+      .item-info {
+        width: 300px;
+
+        .item-info-title {
+          display: flex;
+          align-items: center;
+
+          input {
+            height: 20px;
+            width: 20px;
+          }
+        }
+      }
+
+      .item-actions {
+        margin-top: 1.2rem;
+        margin-left: 2rem;
+      }
+    }
+  }
+
+  .add-task {
+    font-size: 18px;
+    padding: 5px;
+    margin-left: 5rem;
+
+    a {
+      text-decoration: none;
+      color: black;
+
+      &:visited {
+        color: black;
+      }
+    }
+  }
+}

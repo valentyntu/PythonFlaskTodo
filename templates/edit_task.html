@@ -1,0 +1,20 @@
+{% assets "scss_tasks" %}
+	<link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
+
+	<form method="post" action="/tasks/{{ task.id }}" class="task-form">
+		<fieldset class="task-fields">
+			<legend>Task properties</legend>
+			<div class="input-block">
+				<label for="title">Title:</label>
+				<input required type="text" placeholder="Task title" name="title" id="title" value="{{ task.title }}">
+			</div>
+			<div class="input-block">
+				<label for="details">Description:</label>
+				<textarea rows="11" cols="50" maxlength="512" placeholder="Detailed description"
+				          name="details" id="details">{{ task.details }}</textarea>
+			</div>
+
+			<input type="submit">
+		</fieldset>
+	</form>
+{% endassets %}

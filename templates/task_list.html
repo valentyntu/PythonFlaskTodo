@@ -1,0 +1,43 @@
+{% assets "scss_tasks" %}
+	<link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
+
+	<div class="tasks">
+		<h1>TODO list
+			<button class="add-task"><a href="/tasks">Add a task</a></button>
+		</h1>
+		<ul class="tasks-list">
+			{% for task in tasks %}
+				<li class="tasks-list-item">
+					<div class="item-info">
+						<div class="item-info-title">
+							<script>
+                  function toggleStatus(event, taskId) {
+                      const request = new XMLHttpRequest();
+                      const url = `/api/tasks/${taskId}`;
+                      request.open("POST", url);
+                      request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                      request.send(JSON.stringify({'is_done': event.target.checked}));
+                  }
+							</script>
+							<input type="checkbox" {{ "checked" if task.is_done }} onchange="toggleStatus(event, {{ task.id }})">
+							<a href="/tasks/{{ task.id }}">
+								<h3>{{ loop.index }}. {{ task.title }}</h3>
+							</a>
+						</div>
+
+						<p>{{ task.details }}</p>
+					</div>
+					<div class="item-actions">
+						<form action="/tasks/delete/{{ task.id }}" method="post">
+							<input type="submit" value="Delete">
+						</form>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+
+	</div>
+{% endassets %}
+
+
+
