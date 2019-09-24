@@ -53,13 +53,23 @@
           input {
             height: 20px;
             width: 20px;
+            margin: 4px;
           }
         }
+      }
+
+      .item-details {
+        margin-top: 0;
+        padding-left: 28px;
       }
 
       .item-actions {
         margin-top: 1.2rem;
         margin-left: 2rem;
+
+        button, input[type='submit'] {
+          border-radius: 3px;
+        }
       }
     }
   }

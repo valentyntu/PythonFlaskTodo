@@ -3,7 +3,7 @@
 
 	<div class="tasks">
 		<h1>TODO list
-			<button class="add-task"><a href="/tasks">Add a task</a></button>
+			<button class="add-task"><a href="/tasks/add">Add a task</a></button>
 		</h1>
 		<ul class="tasks-list">
 			{% for task in tasks %}
@@ -25,7 +25,7 @@
 							</a>
 						</div>
 
-						<p>{{ task.details }}</p>
+						<div class="item-details">{{ task.details }}</div>
 					</div>
 					<div class="item-actions">
 						<form action="/tasks/delete/{{ task.id }}" method="post">
