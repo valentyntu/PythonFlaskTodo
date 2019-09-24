@@ -13,7 +13,6 @@ assets.register('scss_tasks', scss)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/flask_todo.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
-db.create_all()
 
 
 class Task(db.Model, JSONEncoder):
@@ -28,10 +27,10 @@ class Task(db.Model, JSONEncoder):
 
 @app.route('/')
 def show_homepage():
-    return redirect('/my_tasks')
+    return redirect('/tasks')
 
 
-@app.route('/my_tasks')
+@app.route('/tasks')
 def index_tasks():
     tasks = Task.query.all()
     return render_template('task_list.html', tasks=tasks)
@@ -39,15 +38,22 @@ def index_tasks():
 
 @app.route('/tasks/<task_id>', methods=['POST'])
 def edit_task(task_id):
-    if not (task_id is None):
-        task = Task.query.filter_by(id=task_id).first()
-    else:
-        task = Task()
+    task = Task.query.filter_by(id=task_id).first()
     task.title = request.form['title']
     task.details = request.form['details']
     db.session.commit()
 
-    return redirect('/my_tasks')
+    return redirect('/tasks')
+
+
+@app.route('/tasks', methods=['POST'])
+def add_task():
+    form = request.form
+    task = Task(title=form['title'], details=form['details'])
+    db.session.add(task)
+    db.session.commit()
+
+    return redirect('/tasks')
 
 
 @app.route('/api/tasks/<task_id>', methods=['POST'])
@@ -74,10 +80,10 @@ def delete_task(task_id):
     db.session.delete(task)
     db.session.commit()
 
-    return redirect('/my_tasks')
+    return redirect('/tasks')
 
 
-@app.route('/tasks', methods=['GET'])
+@app.route('/tasks/add', methods=['GET'])
 def show_add_task():
     return render_template('edit_task.html', task=Task(id='', title='', details=''))
 

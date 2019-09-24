@@ -1,7 +1,7 @@
 {% assets "scss_tasks" %}
 	<link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
 
-	<form method="post" action="/tasks/{{ task.id }}" class="task-form">
+	<form method="post" action="/tasks{{ '/' + task.id|string if task.id }}" class="task-form">
 		<fieldset class="task-fields">
 			<legend>Task properties</legend>
 			<div class="input-block">
